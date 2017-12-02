@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Chart from '../components/chart';
+import MapWithAMarker from '../components/google_map';
 
 class WeatherList extends Component {
 
@@ -12,7 +13,16 @@ class WeatherList extends Component {
 
         return (
             <tr key={name}>
-                <td>{name}</td>
+                <td><MapWithAMarker
+                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4pfZRhFQn2BSri6LSsyKrz8tmjajwVWU&v=3.exp&libraries=geometry,drawing,places"
+                    loadingElement={<div style={{ height: `100%` }} />}
+                    containerElement={<div style={{ height: `200px` }} />}
+                    mapElement={<div style={{ height: `100%` }} />}
+                    latitude={cityData.city.coord.lat}
+                    longitude={cityData.city.coord.lon}
+                    zoom={7}
+
+                /></td>
                 <td><Chart data={temps} color="orange" units="Celcius" /></td>
                 <td><Chart data={pressures} color="blue" units="hpa" /></td>
                 <td><Chart data={humidities} color="black" units="%" /></td>
